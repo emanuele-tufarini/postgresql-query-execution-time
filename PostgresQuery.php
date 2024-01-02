@@ -58,4 +58,4 @@ $pg = new PostgresQuery();
 $execution_time = $pg->Time($query, $host, $port, $dbname, $user, $password);
 
 /** stampa il tempo di risposta del server */
-echo ("Tempo di risposta: " . $execution_time . "secondi");
+echo ("Tempo di risposta: " . $execution_time . " secondi");
