@@ -55,7 +55,15 @@ class PostgresQuery {
 
 /** istanzia la classe */
 $pg = new PostgresQuery();
-$execution_time = $pg->Time($query, $host, $port, $dbname, $user, $password);
+
+$n = 10;
+$list = array();
+while ($n >= 0) {
+    $execution_time = $pg->Time($query, $host, $port, $dbname, $user, $password); // Assign the value returned by Time method to $execution_time
+    $list[] = $execution_time;
+    $n = $n - 1;
+}
 
 /** stampa il tempo di risposta del server */
-echo ("Tempo di risposta: " . $execution_time . " secondi");
+var_dump($list);
+//echo ("Tempo di risposta: " . $execution_time . " secondi");
