@@ -27,10 +27,8 @@ class PostgresQuery {
     public function Query($query, $host, $port, $dbname, $user, $password) {
         $conn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password";
         $pdo = new PDO($conn);
-        $res = $pdo->query($query);
-        //$rows = $res->fetchAll(PDO::FETCH_ASSOC);
-        //$json = json_encode($rows);
-        return $res;
+        $response = $pdo->query($query);
+        return $response;
     }
     
     /**
@@ -45,7 +43,6 @@ class PostgresQuery {
      * @return float The execution time of the query in seconds.
      */
     public function Time($query, $host, $port, $dbname, $user, $password) {
-        global $query, $host, $port, $dbname, $user, $password;
         $time_start = microtime(true); 
         $pg = $this->Query($query, $host, $port, $dbname, $user, $password);
         $time_end = microtime(true);
@@ -61,4 +58,4 @@ $pg = new PostgresQuery();
 $execution_time = $pg->Time($query, $host, $port, $dbname, $user, $password);
 
 /** stampa il tempo di risposta del server */
-echo ("Tempo di risposta: " . $execution_time);
+echo ("Tempo di risposta: " . $execution_time . "secondi");
