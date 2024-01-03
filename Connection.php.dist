@@ -10,4 +10,4 @@ $password="db_password";
 
 /** numero di misurazioni da eseguire */
 
-$nTest=10; /** esegui 10 misurazioni */
+$nTest = 10; /** esegui 10 misurazioni */
