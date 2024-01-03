@@ -1,8 +1,8 @@
 <?php
 
 /**
- * This file contains a class for executing queries on a PostgreSQL database.
- * It also calculates the execution time of the query.
+ * Questo file contiene una classe per eseguire query su un database PostgreSQL.
+ * Calcola anche il tempo di esecuzione della query.
  */
 
 /** credenziali di accesso al database postgres */
@@ -14,15 +14,15 @@ $query = file_get_contents("Query.sql");
 /** classe per testare le query sul database postgres */
 class PostgresQuery {
     /**
-     * Executes the query on the PostgreSQL database.
+     * Esegue la query sul database PostgreSQL.
      * 
-     * @param string $query The SQL query to be executed.
-     * @param string $host The host name of the PostgreSQL server.
-     * @param int $port The port number of the PostgreSQL server.
-     * @param string $dbname The name of the PostgreSQL database.
-     * @param string $user The username for connecting to the PostgreSQL server.
-     * @param string $password The password for connecting to the PostgreSQL server.
-     * @return PDOStatement The result of the query execution.
+     * @param string $query La query SQL da eseguire.
+     * @param string $host Il nome host del server PostgreSQL.
+     * @param int $port Il numero di porta del server PostgreSQL.
+     * @param string $dbname Il nome del database PostgreSQL.
+     * @param string $user Il nome utente per la connessione al server PostgreSQL.
+     * @param string $password La password per la connessione al server PostgreSQL.
+     * @return PDOStatement Il risultato dell'esecuzione della query.
      */
     public function query($query, $host, $port, $dbname, $user, $password) {
         $conn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password";
@@ -32,15 +32,15 @@ class PostgresQuery {
     }
     
     /**
-     * Calculates the execution time of the query.
+     * Calcola il tempo di esecuzione della query.
      * 
-     * @param string $query The SQL query to be executed.
-     * @param string $host The host name of the PostgreSQL server.
-     * @param int $port The port number of the PostgreSQL server.
-     * @param string $dbname The name of the PostgreSQL database.
-     * @param string $user The username for connecting to the PostgreSQL server.
-     * @param string $password The password for connecting to the PostgreSQL server.
-     * @return float The execution time of the query in seconds.
+     * @param string $query La query SQL da eseguire.
+     * @param string $host Il nome host del server PostgreSQL.
+     * @param int $port Il numero di porta del server PostgreSQL.
+     * @param string $dbname Il nome del database PostgreSQL.
+     * @param string $user Il nome utente per la connessione al server PostgreSQL.
+     * @param string $password La password per la connessione al server PostgreSQL.
+     * @return float Il tempo di esecuzione della query in secondi.
      */
     public function time($query, $host, $port, $dbname, $user, $password) {
         $timeStart = microtime(true); 
@@ -58,7 +58,7 @@ $pg = new PostgresQuery();
 
 $list = array();
 while ($nTest >= 1) {
-    $executionTime = $pg->time($query, $host, $port, $dbname, $user, $password); // Assign the value returned by Time method to $executionTime
+    $executionTime = $pg->time($query, $host, $port, $dbname, $user, $password); // Assegna il valore restituito dal metodo Time a $executionTime
     $list[] = $executionTime;
     $nTest = $nTest - 1;
 }
