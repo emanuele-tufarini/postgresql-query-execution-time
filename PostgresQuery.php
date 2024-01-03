@@ -66,4 +66,3 @@ while ($n >= 0) {
 
 /** stampa il tempo di risposta del server */
 var_dump($list);
-//echo ("Tempo di risposta: " . $execution_time . " secondi");
