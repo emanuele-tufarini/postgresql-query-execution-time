@@ -24,7 +24,7 @@ class PostgresQuery {
      * @param string $password The password for connecting to the PostgreSQL server.
      * @return PDOStatement The result of the query execution.
      */
-    public function Query($query, $host, $port, $dbname, $user, $password) {
+    public function query($query, $host, $port, $dbname, $user, $password) {
         $conn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password";
         $pdo = new PDO($conn);
         $response = $pdo->query($query);
@@ -42,13 +42,13 @@ class PostgresQuery {
      * @param string $password The password for connecting to the PostgreSQL server.
      * @return float The execution time of the query in seconds.
      */
-    public function Time($query, $host, $port, $dbname, $user, $password) {
-        $time_start = microtime(true); 
-        $pg = $this->Query($query, $host, $port, $dbname, $user, $password);
-        $time_end = microtime(true);
+    public function time($query, $host, $port, $dbname, $user, $password) {
+        $timeStart = microtime(true); 
+        $pg = $this->query($query, $host, $port, $dbname, $user, $password);
+        $timeEnd = microtime(true);
         /** per convertire in minuti dividere per 60 */
-        $execution_time = ($time_end - $time_start);
-        return $execution_time;        
+        $executionTime = ($timeEnd - $timeStart);
+        return $executionTime;        
     }
     
 }
@@ -56,12 +56,11 @@ class PostgresQuery {
 /** istanzia la classe */
 $pg = new PostgresQuery();
 
-$n = 10;
 $list = array();
-while ($n >= 0) {
-    $execution_time = $pg->Time($query, $host, $port, $dbname, $user, $password); // Assign the value returned by Time method to $execution_time
-    $list[] = $execution_time;
-    $n = $n - 1;
+while ($nTest >= 1) {
+    $executionTime = $pg->time($query, $host, $port, $dbname, $user, $password); // Assign the value returned by Time method to $executionTime
+    $list[] = $executionTime;
+    $nTest = $nTest - 1;
 }
 
 /** stampa il tempo di risposta del server */
