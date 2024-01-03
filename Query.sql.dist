@@ -1,1 +1,1 @@
-SELECT * FROM database.schema.table_name
+SELECT * FROM database.schema.table_name;
