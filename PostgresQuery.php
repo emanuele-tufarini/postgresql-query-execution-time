@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Questo file contiene una classe per eseguire query su un database PostgreSQL.
+ * Questo file contiene una classe per l'esecuzione di query su un database PostgreSQL.
  * Calcola anche il tempo di esecuzione della query.
  */
 
-/** credenziali di accesso al database postgres */
+/** Credenziali di accesso al database per PostgreSQL */
 require "Connection.php";
 
-/** inserire la query sql dentro al file Query.sql */
+/** Leggi la query SQL dal file Query.sql */
 $query = file_get_contents("Query.sql");
 
-/** classe per testare le query sul database postgres */
+/** Classe per il test delle query su database PostgreSQL */
 class PostgresQuery {
     /**
      * Esegue la query sul database PostgreSQL.
      * 
      * @param string $query La query SQL da eseguire.
-     * @param string $host Il nome host del server PostgreSQL.
+     * @param string $host L'hostname del server PostgreSQL.
      * @param int $port Il numero di porta del server PostgreSQL.
      * @param string $dbname Il nome del database PostgreSQL.
      * @param string $user Il nome utente per la connessione al server PostgreSQL.
@@ -27,15 +27,14 @@ class PostgresQuery {
     public function query($query, $host, $port, $dbname, $user, $password) {
         $conn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password";
         $pdo = new PDO($conn);
-        $response = $pdo->query($query);
-        return $response;
+        return $pdo->query($query);
     }
     
     /**
      * Calcola il tempo di esecuzione della query.
      * 
      * @param string $query La query SQL da eseguire.
-     * @param string $host Il nome host del server PostgreSQL.
+     * @param string $host L'hostname del server PostgreSQL.
      * @param int $port Il numero di porta del server PostgreSQL.
      * @param string $dbname Il nome del database PostgreSQL.
      * @param string $user Il nome utente per la connessione al server PostgreSQL.
@@ -46,22 +45,21 @@ class PostgresQuery {
         $timeStart = microtime(true); 
         $pg = $this->query($query, $host, $port, $dbname, $user, $password);
         $timeEnd = microtime(true);
-        /** per convertire in minuti dividere per 60 */
-        $executionTime = ($timeEnd - $timeStart);
+        $executionTime = $timeEnd - $timeStart;
         return $executionTime;        
     }
     
 }
 
-/** istanzia la classe */
+/** Istanziare la classe */
 $pg = new PostgresQuery();
 
-$list = array();
+$list = [];
 while ($nTest >= 1) {
-    $executionTime = $pg->time($query, $host, $port, $dbname, $user, $password); // Assegna il valore restituito dal metodo Time a $executionTime
+    $executionTime = $pg->time($query, $host, $port, $dbname, $user, $password);
     $list[] = $executionTime;
-    $nTest = $nTest - 1;
+    $nTest--;
 }
 
-/** stampa il tempo di risposta del server */
+/** Stampa il tempo di risposta del server */
 var_dump($list);
